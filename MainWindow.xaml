@@ -45,6 +45,7 @@
             <CheckBox x:Name="ChkErr" Content="Error" IsChecked="True" Margin="5 10"
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
             <CheckBox x:Name="ChkDbg" Content="Debug" IsChecked="True" Margin="5 10" Checked="FilterChanged" Unchecked="FilterChanged"/>
+            <CheckBox x:Name="ChkAutoRefresh" Content="Auto-Refresh" Margin="5 10" IsChecked="True" Checked="ChkAutoRefresh_OnChecked" Unchecked="ChkAutoRefresh_OnUnchecked"/>
             
             <TextBlock Text="🔍"
                        FontSize="16"
@@ -76,7 +77,6 @@
                     </Border>
 
                     <DataTemplate.Triggers>
-
                         <!-- ERROR -->
                         <DataTrigger Binding="{Binding}" Value="[Error]">
                             <Setter TargetName="RowBorder" Property="Background" Value="#FFFFD7D7"/> 
@@ -87,17 +87,20 @@
                             <Setter TargetName="RowBorder" Property="Background" Value="#FFFFF8D0"/>
                         </DataTrigger>
                         
+                        <!-- DEBUG -->
                         <DataTrigger Binding="{Binding}" Value="[Debug]">
                             <Setter TargetName="RowBorder" Property="Background" Value="BlueViolet"></Setter>
                         </DataTrigger>
-
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         
         <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="2">
-            <Button Content="About" Margin="200 4 200 0" Click="ButtonBase_OnClick"/>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Content="About" HorizontalAlignment="Left" Click="ButtonBase_OnClick" Margin="10 5 10 0" Width="80"/>
+                <Button Content="Settings" HorizontalAlignment="Right" Click="BtnSettingsClick" Margin="10 5 10 0" Width="80"/>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </Window>

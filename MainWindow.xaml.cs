@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ColdNightsLogViewer.Logger;
 using ColdNightsLogViewer.Windows;
 using Microsoft.Win32;
@@ -15,7 +16,10 @@ public partial class MainWindow : Window
 {
     private string _currentPath;
     private About? _about;
+    private Settings? _settings;
 
+    private DispatcherTimer? _timer;
+    
     private int _tickInterval = 3;
     private int _s;
     
@@ -24,6 +28,9 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         LogManager.PushInfo("Initializing Cold Nights Log Viewer.", this);
+        
+        _timer = new DispatcherTimer() {Interval = TimeSpan.FromSeconds(_tickInterval)};
+        _timer.Tick += OnTimerTick;
     }
 
     private void BtnOpen_Click(object sender, RoutedEventArgs e)
@@ -60,7 +67,7 @@ public partial class MainWindow : Window
 
     private void FilterChanged(object sender, RoutedEventArgs e)
     {
-        if (_currentPath == null)
+        if (string.IsNullOrWhiteSpace(_currentPath))
         {
             LogManager.PushError($"No file selected!", this);
             return;
@@ -129,5 +136,32 @@ public partial class MainWindow : Window
        _about?.Close();
        _about = null;
        LogManager.PushInfo($"about={_about}", this);
+    }
+
+    private void ChkAutoRefresh_OnChecked(object sender, RoutedEventArgs e)
+    {
+        _timer?.Start();
+    }
+
+    private void OnTimerTick(object? sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(_currentPath)) return;
+        ReloadLog();
+    }
+
+    private void ChkAutoRefresh_OnUnchecked(object sender, RoutedEventArgs e)
+    {
+        _timer?.Stop();
+    }
+
+    private void BtnSettingsClick(object sender, RoutedEventArgs e)
+    {
+        _settings = new Settings() {Owner = this};
+        _settings.Closed += (_, _) =>
+        {
+            _settings.Close();
+            _settings = null; 
+        };
+        _settings.Show();
     }
 }
