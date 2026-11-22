@@ -10,7 +10,6 @@ public partial class Settings : Window
     {
         InitializeComponent();
         
-        TextRefreshInterval.Text = GlobalSettings.I.AutoRefreshIntervalSeconds.ToString();
         ChkAutoRefresh.IsChecked = GlobalSettings.I.AutoRefresh;
         ChkDarkMode.IsChecked = GlobalSettings.I.DarkMode;
     }
