@@ -20,8 +20,6 @@ public partial class MainWindow : Window
 
     private DispatcherTimer? _timer;
     
-    private int _tickInterval = 3;
-    private int _s;
     
     public MainWindow()
     {
@@ -29,8 +27,13 @@ public partial class MainWindow : Window
         
         LogManager.PushInfo("Initializing Cold Nights Log Viewer.", this);
         
-        _timer = new DispatcherTimer() {Interval = TimeSpan.FromSeconds(_tickInterval)};
+        _timer = new DispatcherTimer() {Interval = TimeSpan.FromSeconds(GlobalSettings.I.AutoRefreshIntervalSeconds)};
         _timer.Tick += OnTimerTick;
+
+        if (GlobalSettings.I.AutoRefresh == true)
+        {
+            _timer.Start();
+        }
     }
 
     private void BtnOpen_Click(object sender, RoutedEventArgs e)
@@ -110,7 +113,7 @@ public partial class MainWindow : Window
 
     private void BtnRefresh_OnClick(object sender, RoutedEventArgs e)
     {
-        if (_currentPath == null)
+        if (string.IsNullOrEmpty(_currentPath))
         {
             LogManager.PushError($"No file selected!", this);
             return;
@@ -138,20 +141,11 @@ public partial class MainWindow : Window
        LogManager.PushInfo($"about={_about}", this);
     }
 
-    private void ChkAutoRefresh_OnChecked(object sender, RoutedEventArgs e)
-    {
-        _timer?.Start();
-    }
-
     private void OnTimerTick(object? sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(_currentPath)) return;
         ReloadLog();
-    }
-
-    private void ChkAutoRefresh_OnUnchecked(object sender, RoutedEventArgs e)
-    {
-        _timer?.Stop();
+        Console.Beep(200, 200);
     }
 
     private void BtnSettingsClick(object sender, RoutedEventArgs e)
@@ -163,5 +157,17 @@ public partial class MainWindow : Window
             _settings = null; 
         };
         _settings.Show();
+
+        _settings.SettingChanged += (_, _) =>
+        {
+            if (GlobalSettings.I.AutoRefresh == true)
+            {
+                _timer?.Start();
+            }
+            else
+            {
+                _timer?.Stop();
+            }
+        };
     }
 }

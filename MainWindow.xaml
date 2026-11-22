@@ -45,7 +45,6 @@
             <CheckBox x:Name="ChkErr" Content="Error" IsChecked="True" Margin="5 10"
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
             <CheckBox x:Name="ChkDbg" Content="Debug" IsChecked="True" Margin="5 10" Checked="FilterChanged" Unchecked="FilterChanged"/>
-            <CheckBox x:Name="ChkAutoRefresh" Content="Auto-Refresh" Margin="5 10" IsChecked="True" Checked="ChkAutoRefresh_OnChecked" Unchecked="ChkAutoRefresh_OnUnchecked"/>
             
             <TextBlock Text="🔍"
                        FontSize="16"

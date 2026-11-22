@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ColdNightsLogViewer.Windows"
         mc:Ignorable="d"
-        Title="Settings" Height="100" Width="150">
+        Title="Settings" Height="150" Width="250">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -16,8 +16,11 @@
             <Label Content="Settings" FontWeight="Bold"/>
             <Separator/>
             <CheckBox x:Name="ChkDarkMode" Click="ChkDarkMode_OnClick" Content="Dark Mode" Margin="10"/>
-            <CheckBox x:Name="ChkAutoRefresh" Click="ChkAutoRefresh_OnClick" Content="Log Auto-Refresh" Margin="10 0"></CheckBox>
-            
+            <CheckBox x:Name="ChkAutoRefresh" Checked="ChkAutoRefresh_OnClick" Unchecked="ChkAutoRefresh_OnUnchecked" Content="Log Auto-Refresh" Margin="10 0"/>
+            <WrapPanel>
+                <Label Content="Auto-Refresh Interval"/>
+                <TextBox x:Name="TextRefreshInterval" Width="100" Height="15"/>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </Window>
