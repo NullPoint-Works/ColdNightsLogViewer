@@ -41,10 +41,11 @@
             <CheckBox x:Name="ChkInfo" Content="Info" IsChecked="True" Margin="5 10"
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
             <CheckBox x:Name="ChkWarn" Content="Warning" IsChecked="True" Margin="5 10 "
-                      Checked="FilterChanged" Unchecked="FilterChanged"/>
+                      Checked="FilterChanged" Unchecked="FilterChanged" Foreground="Goldenrod"/>
             <CheckBox x:Name="ChkErr" Content="Error" IsChecked="True" Margin="5 10"
-                      Checked="FilterChanged" Unchecked="FilterChanged"/>
-            <CheckBox x:Name="ChkDbg" Content="Debug" IsChecked="True" Margin="5 10" Checked="FilterChanged" Unchecked="FilterChanged"/>
+                      Checked="FilterChanged" Unchecked="FilterChanged" Foreground="Red"/>
+            <CheckBox x:Name="ChkDbg" Content="Debug" IsChecked="True" Margin="5 10" 
+                      Checked="FilterChanged" Unchecked="FilterChanged" Foreground="RoyalBlue" />
             
             <TextBlock Text="🔍"
                        FontSize="16"
