@@ -145,7 +145,6 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrEmpty(_currentPath)) return;
         ReloadLog();
-        Console.Beep(200, 200);
     }
 
     private void BtnSettingsClick(object sender, RoutedEventArgs e)
