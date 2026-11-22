@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Pasek na górze -->
@@ -27,12 +28,23 @@
                     Margin="0 0 10 0"
                     Click="BtnOpen_Click"/>
             
-            <CheckBox x:Name="ChkInfo" Content="Info" IsChecked="True" Margin="10 0"
+            <Button x:Name="BtnRefresh"
+                    Content="🔄️"
+                    Background="PaleGoldenrod"
+                    Margin="10 2 10 2"
+                    BorderThickness="2"
+                    ToolTip="Refresh current file."
+                    BorderBrush="Black"
+                    Width="30"
+                    Click="BtnRefresh_OnClick"/>
+            
+            <CheckBox x:Name="ChkInfo" Content="Info" IsChecked="True" Margin="5 10"
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
-            <CheckBox x:Name="ChkWarn" Content="Warning" IsChecked="True" Margin="10 0"
+            <CheckBox x:Name="ChkWarn" Content="Warning" IsChecked="True" Margin="5 10 "
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
-            <CheckBox x:Name="ChkErr" Content="Error" IsChecked="True" Margin="10 0"
+            <CheckBox x:Name="ChkErr" Content="Error" IsChecked="True" Margin="5 10"
                       Checked="FilterChanged" Unchecked="FilterChanged"/>
+            <CheckBox x:Name="ChkDbg" Content="Debug" IsChecked="True" Margin="5 10" Checked="FilterChanged" Unchecked="FilterChanged"/>
             
             <TextBlock Text="🔍"
                        FontSize="16"
@@ -74,12 +86,18 @@
                         <DataTrigger Binding="{Binding}" Value="[Warning]">
                             <Setter TargetName="RowBorder" Property="Background" Value="#FFFFF8D0"/>
                         </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding}" Value="[Debug]">
+                            <Setter TargetName="RowBorder" Property="Background" Value="BlueViolet"></Setter>
+                        </DataTrigger>
 
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
+        
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="2">
+            <Button Content="About" Margin="200 4 200 0" Click="ButtonBase_OnClick"/>
+        </StackPanel>
     </Grid>
-
 </Window>

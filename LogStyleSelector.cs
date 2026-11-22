@@ -9,7 +9,7 @@ public class LogStyleSelector : StyleSelector
     public Style? WarningStyle { get; set; }
     public Style? ErrorStyle { get; set; }
 
-    public override Style SelectStyle(object item, DependencyObject container)
+    public override Style? SelectStyle(object item, DependencyObject container)
     {
         string line = item as string ?? "";
         

@@ -14,6 +14,8 @@ public class LogColorConverter : IValueConverter
             return Brushes.Red;
         if (line.Contains("[Warning]"))
             return Brushes.Goldenrod;
+        if (line.Contains("[Debug]"))
+            return Brushes.RoyalBlue;
 
         return Brushes.Black;
     }

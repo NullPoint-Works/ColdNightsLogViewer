@@ -12,6 +12,10 @@
       <None Remove="Assets\icon.png" />
       <None Remove="Assets\ico2.png" />
       <Resource Include="Assets\ico2.png" />
+      <None Remove="Assets\about.txt" />
+      <Content Include="Assets\about.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

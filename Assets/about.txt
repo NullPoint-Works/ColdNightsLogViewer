@@ -1,0 +1,15 @@
+﻿Cold Nights Log Viewer is a lightweight and efficient tool designed for developers to analyze log files with ease. While it was originally built to hunt down frosty bugs in Cold Nights, it’s a versatile text viewer that works perfectly with any text-based file you throw at it. 🧊💻
+
+🚀 Key Features:
+🔍 Smart Filtering: Quickly toggle visibility for different log levels: INFO, WARNING, ERROR, and DEBUG. Stop scrolling and start finding!
+
+⌨️ Keyword Search: Built-in search functionality to track down specific variables, phrases, or pesky errors in an instant.
+
+🔄 Live Refresh: Did your log file update while you were debugging? Refresh the content instantly without closing and reopening the file.
+
+📄 Universal Support: Optimized for Godot engine logs, but fully compatible with any .txt, .log, or other plain text formats.
+
+⚖️ Legal and License
+Copyright © 2026 NullPoint Works
+
+This software is released under the MIT License. You are free to use, copy, and modify it, provided that the original copyright notice is included. The software is provided "as is", without warranty of any kind—just pure passion for gamedev! 🤘🎮

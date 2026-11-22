@@ -1,0 +1,23 @@
+﻿<Window x:Class="ColdNightsLogViewer.Windows.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ColdNightsLogViewer.Windows"
+        mc:Ignorable="d"
+        Title="About" Height="600" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <Label Content="About Cold Nights Log Viewer" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="24"/>
+            <Line X1="0" X2="400" Stroke="Black" StrokeThickness="4"/>
+        </StackPanel>
+        
+        <TextBlock x:Name="Tb" xml:space="preserve" Grid.Row="1" TextWrapping="WrapWithOverflow" Margin="20">
+        </TextBlock>
+    </Grid>
+</Window>

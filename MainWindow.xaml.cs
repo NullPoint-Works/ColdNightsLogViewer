@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ColdNightsLogViewer.Logger;
+using ColdNightsLogViewer.Windows;
 using Microsoft.Win32;
 
 namespace ColdNightsLogViewer;
@@ -12,10 +14,16 @@ namespace ColdNightsLogViewer;
 public partial class MainWindow : Window
 {
     private string _currentPath;
+    private About? _about;
+
+    private int _tickInterval = 3;
+    private int _s;
     
     public MainWindow()
     {
         InitializeComponent();
+        
+        LogManager.PushInfo("Initializing Cold Nights Log Viewer.", this);
     }
 
     private void BtnOpen_Click(object sender, RoutedEventArgs e)
@@ -52,8 +60,12 @@ public partial class MainWindow : Window
 
     private void FilterChanged(object sender, RoutedEventArgs e)
     {
-        if (_currentPath != null)
-            ReloadLog();
+        if (_currentPath == null)
+        {
+            LogManager.PushError($"No file selected!", this);
+            return;
+        }
+        ReloadLog();
     }
 
     private void ReloadLog()
@@ -75,6 +87,8 @@ public partial class MainWindow : Window
             return true;
         if (!line.Contains("[Error]") && !line.Contains("[Warning]") && ChkInfo.IsChecked == true)
             return true;
+        if (line.Contains("[Debug]") && ChkDbg.IsChecked == true)
+            return true;
 
         return false;
     }
@@ -85,5 +99,35 @@ public partial class MainWindow : Window
             return true;
 
         return line.Contains(TxtSearch.Text, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void BtnRefresh_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (_currentPath == null)
+        {
+            LogManager.PushError($"No file selected!", this);
+            return;
+        }
+        ReloadLog();
+    }
+
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (_about != null)
+            return;
+        
+        _about = new About
+        {
+            Owner = this
+        };
+        _about.Show();
+        _about.Closed += ClearAboutWnd;
+    }
+
+    private void ClearAboutWnd(object? sender, EventArgs e)
+    {
+       _about?.Close();
+       _about = null;
+       LogManager.PushInfo($"about={_about}", this);
     }
 }
